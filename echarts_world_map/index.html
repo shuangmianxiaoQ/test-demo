@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>世界地图</title>
+    <script src="https://cdn.bootcss.com/jquery/2.2.3/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/echarts/3.8.0/echarts.min.js"></script>
+    <script src="./map//js/china.js"></script>
+    <script src="./map//js/world.js"></script>
+  </head>
+  <body>
+    <div id="main" style="width: 1600px; height: 800px;"></div>
+    <script>
+      var option = {
+        geo: {
+          map: 'world',
+          zoom: 1,
+          roam: true, // 开启鼠标的缩放和平移
+          label: {
+            normal: {
+              show: true,
+              textStyle: {
+                color: '#fff'
+              }
+            },
+            emphasis: {
+              textStyle: {
+                color: '#fff'
+              }
+            }
+          },
+          itemStyle: {
+            normal: {
+              areaColor: '#59606A', // 地图默认的背景颜色
+              borderColor: '#A6C84C' // 地图默认的边线颜色
+            },
+            emphasis: {
+              areaColor: '#A6C84C' // 地图触发地区的背景颜色
+            }
+          }
+        }
+      };
+
+      $.getJSON('/map/json/USA.json', function(res) {
+        echarts.registerMap('USA', res);
+        var myChart = echarts.init(document.getElementById('main'));
+        myChart.setOption(option);
+      });
+    </script>
+  </body>
+</html>
