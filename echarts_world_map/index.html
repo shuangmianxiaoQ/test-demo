@@ -43,8 +43,8 @@
         }
       };
 
-      $.getJSON('http://www.echartsjs.com/gallery/data/asset/geo/USA.json', function(res) {
-        echarts.registerMap('USA', res);
+      $.getJSON('./map/json/world.json', function(res) {
+        echarts.registerMap('world', res);
         var myChart = echarts.init(document.getElementById('main'));
         myChart.setOption(option);
       });
