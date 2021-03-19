@@ -1,34 +1,150 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Chrome兼容性测试</title>
-</head>
-
-<body>
-  <script>
-    //创建RTCPeerConnection接口
-    let conn = new RTCPeerConnection({
-      iceServers: []
-    })
-    let noop = function () { }
-    conn.onicecandidate = function (ice) {
-      if (ice.candidate) {
-        //使用正则获取ip
-        let ip_regex = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/
-        let ip_addr = ip_regex.exec(ice.candidate.candidate)[1];
-        console.log(ip_addr)
-        conn.onicecandidate = noop
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <title>系统升级中</title>
+    <style>
+      :root {
+        --primary-color: #ff553c;
+        --text-color: #4a4a4a;
+        --white-color: #ffffff;
       }
-    }
-    //随便创建一个叫狗的通道(channel)
-    conn.createDataChannel('dog')
-    //创建一个SDP协议请求
-    conn.createOffer(conn.setLocalDescription.bind(conn), noop)
-  </script>
-</body>
 
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: PingFangSC-Regular, PingFang SC;
+        background-color: var(--primary-color);
+        overflow: auto;
+      }
+
+      .container {
+        width: 100%;
+        min-height: 100vh;
+      }
+
+      .cover {
+        width: 3.75rem;
+        height: 2.79rem;
+        background: url('https://imagev2.xmcdn.com/storages/12ea-audiofreehighqps/36/47/CMCoOSQEKkOnAAA0oACUPtzk.png')
+          no-repeat;
+        background-size: 100% 100%;
+      }
+
+      .wrapper {
+        padding: 0.13rem;
+        width: 3.75rem;
+        background-color: var(--white-color);
+      }
+
+      .content {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 3.49rem;
+        border: 1px solid var(--primary-color);
+      }
+
+      .content > span {
+        position: absolute;
+        width: 0.08rem;
+        height: 0.08rem;
+        background-color: var(--primary-color);
+      }
+
+      .content > span:nth-child(1) {
+        top: -0.04rem;
+        left: -0.04rem;
+      }
+
+      .content > span:nth-child(2) {
+        top: -0.04rem;
+        right: -0.04rem;
+      }
+
+      .content > span:nth-child(3) {
+        bottom: -0.04rem;
+        left: -0.04rem;
+      }
+
+      .content > span:nth-child(4) {
+        bottom: -0.04rem;
+        right: -0.04rem;
+      }
+
+      .tips {
+        margin-top: 0.33rem;
+        font-size: 0.16rem;
+        color: var(--text-color);
+        line-height: 0.22rem;
+        text-align: center;
+      }
+
+      .site {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 0.08rem;
+        width: 1.72rem;
+        height: 0.26rem;
+        background-color: var(--primary-color);
+        font-size: 0.14rem;
+        color: var(--white-color);
+        border-radius: 0.02rem;
+      }
+
+      .guide {
+        margin-top: 0.31rem;
+        font-size: 0.16rem;
+        font-family: PingFangSC-Medium, PingFang SC;
+        font-weight: 500;
+        color: var(--text-color);
+        line-height: 0.22rem;
+      }
+
+      .pic {
+        margin: 0.12rem 0 0.21rem;
+        width: 2.98rem;
+        height: 1.6rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="cover"></div>
+      <div class="wrapper">
+        <div class="content">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <div class="tips">快前往【喜马拉雅电脑端】<br />体验新版蜜声吧！</div>
+          <div class="site">网址：ximalaya.com</div>
+          <div class="guide">【创作中心】—【收益】—【蜜声】</div>
+          <img
+            class="pic"
+            src="https://imagev2.xmcdn.com/storages/5ca4-audiofreehighqps/82/DD/CMCoOScEKkOnAABlAwCUPty3.png"
+            alt=""
+          />
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        window.addEventListener('resize', setFont);
+        function setFont() {
+          var fixSize = (document.body.clientWidth / 375) * 100;
+          document.getElementsByTagName('html')[0].style.fontSize = fixSize + 'px';
+        }
+        setFont();
+      })();
+    </script>
+  </body>
 </html>
